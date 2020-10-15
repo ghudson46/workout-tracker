@@ -18,6 +18,28 @@ app.use(express.static('public'));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/populatedb', { useNewUrlParser: true });
 
 
+// sudo code
+
+/*
+-need 2 models??? (workout and exercise)
+-each workout will have a unique id to populate exercises
+-each exercise will have type, a name and a weight or time based on type
+
+
+need to 
+-create a new workout
+-open an existing workout
+-view one workout
+-view all workouts
+-view one exercise
+-view all exercies
+-populate workouts with all exercises
+-add the total weight of a workout and use data to populate tables and graphs
+
+
+
+*/
+
 
   app.listen(PORT, () => {
     console.log(`App is running on port ${PORT}`);
