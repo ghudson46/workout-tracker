@@ -37,6 +37,15 @@ need to
 -add the total weight of a workout and use data to populate tables and graphs
 
 
+look at library example 
+library = workout 
+
+book = exercise
+
+title = exercise name
+author = weight
+type can be a boolean with true = resistance and false = cardio, or can just be a string 
+
 
 */
 
