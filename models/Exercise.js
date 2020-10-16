@@ -3,16 +3,31 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ExerciseSchema = new Schema({
+  type: {
+    type: String,
+    unique: true,
+    required: true
+  },
   name: {
     type: String,
-    unique: true
+    required: true
   },
-  values: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Value"
-    }
-  ]
+  duration: {
+    type: Number,
+    required: false
+  },
+  weight: {
+    type: Number,
+    required: true
+  },
+  reps: {
+    type: Number,
+    require: true
+  },
+  sets: {
+    type: Number,
+    require: true
+  }
 });
 
 const Exercise = mongoose.model("Exercise", ExerciseSchema);

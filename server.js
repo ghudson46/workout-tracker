@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 3001;
 
-const db = require('./models/Exercise');
+const db = require('./models');
 
 const app = express();
 
@@ -49,7 +49,18 @@ type can be a boolean with true = resistance and false = cardio, or can just be 
 
 */
 
-
-  app.listen(PORT, () => {
-    console.log(`App is running on port ${PORT}`);
+db.Workout.create({ name: 'First Workout' })
+  .then(dbWorkout => {
+    console.log(dbWorkout);
   })
+  .catch(({message}) => {
+    console.log(message);
+  });
+
+  app.post('/submit', ({body}, res) => {
+    db.Exercise.create(body)
+  })
+
+app.listen(PORT, () => {
+  console.log(`App is running on port ${PORT}`);
+})
