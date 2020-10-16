@@ -1,22 +1,33 @@
+// dependencies
 const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-
-const PORT = process.env.PORT || 3001;
-
 const db = require('./models');
 
+// Express
+const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Morgan Logger
 app.use(logger("dev"));
 
+// Data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static('public'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/populatedb', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', 
+{ 
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useUnifiedModifiers: false
+}, err => console.log(err)
+);
 
+// Routes
+require('./routes/apiRoutes')(app);
+require('./routes/htmlRoutes')(app)
 
 // sudo code
 
@@ -48,18 +59,6 @@ type can be a boolean with true = resistance and false = cardio, or can just be 
 
 
 */
-
-db.Workout.create({ name: 'First Workout' })
-  .then(dbWorkout => {
-    console.log(dbWorkout);
-  })
-  .catch(({message}) => {
-    console.log(message);
-  });
-
-  app.post('/submit', ({body}, res) => {
-    db.Exercise.create(body)
-  })
 
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
