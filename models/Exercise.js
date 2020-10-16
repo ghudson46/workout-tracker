@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const ExerciseSchema = new Schema({
   type: {
     type: String,
-    unique: true,
+    enum: ['cardio', 'resistance'],
     required: true
   },
   name: {
@@ -14,19 +14,31 @@ const ExerciseSchema = new Schema({
   },
   duration: {
     type: Number,
-    required: false
+    required: true
+  },
+  distance: {
+    type: Number,
+    required: () => {
+      return this.type === 'cardio';
+    }
   },
   weight: {
     type: Number,
-    required: true
+    required: () => {
+      return this.type === 'resistence';
+    }
   },
   reps: {
     type: Number,
-    require: true
+    required: () => {
+      return this.type === 'resistence';
+    }
   },
   sets: {
     type: Number,
-    require: true
+    required: () => {
+      return this.type === 'resistence';
+    }
   }
 });
 
