@@ -48,4 +48,10 @@ module.exports = (app) => {
                 res.json(err);
             });
     });
+
+    // delete existing workouts
+    app.delete('/api/workouts', ({ body }, res) => {
+        Workout.findByIdAndDelete(body.id);
+    });
 };
+
