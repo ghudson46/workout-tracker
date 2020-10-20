@@ -24,25 +24,25 @@ const WorkoutSchema = new Schema(
         },
         distance: {
           type: Number,
-          required: function () {
+          required: () => {
             return this.type === "cardio";
           },
         },
         weight: {
           type: Number,
-          required: function () {
+          required: () => {
             return this.type === "resistance";
           },
         },
         sets: {
           type: Number,
-          required: function () {
+          required: () => {
             return this.type === "resistance";
           },
         },
         reps: {
           type: Number,
-          required: function () {
+          required: () => {
             return this.type === "resistance";
           },
         },
