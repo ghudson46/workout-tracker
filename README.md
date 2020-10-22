@@ -27,7 +27,7 @@ npm install
 
 ## Instructions
 
-Application deployed on [Heroku](link here).
+Application deployed on [Heroku](https://gh46-workout-tracker.herokuapp.com/).
 
 ## Features
 
