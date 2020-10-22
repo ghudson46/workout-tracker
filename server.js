@@ -1,35 +1,28 @@
-// dependencies
-const express = require('express');
-const logger = require('morgan');
-const mongoose = require('mongoose');
-const db = require('./models');
+const express = require("express");
+const mongoose = require("mongoose");
+const logger = require("morgan");
 
-// Express
-const PORT = 3001;
+const PORT = process.env.PORT || 3003;
+
 const app = express();
 
-// Morgan Logger
 app.use(logger("dev"));
-
-// Data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost/workout', 
-{ 
+app.use(express.static("public"));
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/WorkoutSchema", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useUnifiedModify: false
-}, err => console.log(err)
-);
+  useFindAndModify: false
+});
 
-// Routes
-require('./routes/apiRoutes')(app);
-require('./routes/htmlRoutes')(app)
-
+// routes
+app.use(require("./routes/apiRoutes"));
+app.use(require("./routes/htmlRoutes"));
 
 app.listen(PORT, () => {
-  console.log(`App is running on port ${PORT}`);
-})
+  console.log(`App running on port ${PORT}!`);
+});
