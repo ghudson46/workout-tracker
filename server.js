@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhostWorkoutSchema',
+  process.env.MONGODB_URI || 'mongodb://localhost/WorkoutSchema',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
