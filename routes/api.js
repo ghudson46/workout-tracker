@@ -28,6 +28,7 @@ router.get("/api/workouts", (req, res) => {
 // find workout range (7 days) for stats
 router.get("/api/workouts/range", (req, res) => {
   Workout.find({})
+  .sort({ "day": -1 })
   .limit(7)
   .then((data) => { res.json(data) })
   .catch((err) => { res.json(err) });
